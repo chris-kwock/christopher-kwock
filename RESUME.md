@@ -16,21 +16,39 @@ Finance student pursuing concurrent B.S. and M.S. in Finance at the University o
 
 ## Work Experience
 
-### First Hawaiian Bank
-**Bishop Street Funds**
-- Respond to shareholder inquiries for over 1200 shareholders regarding account transactions, holdings, and investment information
-- Prepare trend reports using Bloomberg data for financial advisor and shareholder outreach
-- Facilitate compliance process for outreach documents and presentations
+### First Hawaiian Bank — Bishop Street Funds
+**Mutual Fund Representative**  
+Honolulu, HI | March 2026 – Present
 
-### Iolani School
-**KA'I Program Tutor**
-- Tutor sixth to eighth grade students across all subjects
+- Respond to shareholder inquiries for over 1,200 shareholders regarding account transactions, holdings, and investment information.
+- Prepare trend reports using Bloomberg data for financial advisor and shareholder outreach.
+- Facilitate the compliance process for outreach documents and presentations.
 
-### Apple
-**Specialist**
-- Consulted with small to medium-sized businesses to expand and curate technological solutions
-- Led onboarding and training for new hires
-- Maintained 95%+ customer review scores across tenure by building rapport quickly and effectively managing multiple customers simultaneously
+### ʻIolani School
+**KAʻI Program Tutor**  
+Honolulu, HI | August 2026 – Present
+
+- Tutor sixth- to eighth-grade students across all subjects.
+
+### Apple — Ala Moana & Royal Hawaiian
+**Specialist**  
+Honolulu, HI | 2021 – 2026
+
+- Consulted with small- to medium-sized businesses to expand and curate technological solutions.
+- Led onboarding and training for new hires.
+- Maintained 95%+ customer review scores across tenure by building rapport quickly and effectively managing multiple customers simultaneously.
+
+### Yung Yee Kee Dim Sum
+**Food Runner**  
+Honolulu, HI | May 2021 – August 2021
+
+### Kawānanakoa Middle School
+**Orchestra Teaching Assistant**  
+Honolulu, HI | June 2016 – July 2016
+
+### Kwock Konstruction
+**Construction Laborer**  
+Honolulu, HI | 2015 – 2019
 
 ## Certifications
 - Bloomberg Market Concepts (BMC)

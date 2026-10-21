@@ -28,7 +28,7 @@ Honolulu, HI | March 2026 – Present
 **KAʻI Program Tutor**  
 Honolulu, HI | August 2026 – Present
 
-- Tutor sixth- to eighth-grade students across all subjects.
+- Tutor sixth to eighth grade students across all subjects.
 
 ### Apple — Ala Moana & Royal Hawaiian
 **Specialist**  

@@ -1,6 +1,6 @@
 # Stage 3 Build Audit — Forest Software
 
-**Auditor:** Christopher Kwock (review and confirm before submission)  
+**Auditor:** Christopher Kwock
 **Date:** 2026-11-12  
 **Artifact:** `capabilities/fx-hedging/model.xlsx`  
 **Status:** Automated structural and formula checks completed; manual Excel inspection remains required.

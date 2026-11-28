@@ -1,0 +1,668 @@
+# **Forest Software — Foreign Exchange Hedge Analysis**
+
+**Scenario:** 21 — Forest Software\
+**Market observation date:** November 20, 2026\
+**Exposure:** EUR 1,700,000 receivable\
+**Settlement horizon:** 182 calendar days\
+**Currency convention:** USD per EUR\
+**Basis of analysis:** Stage 2 Model Specification and Stage 4 Market-Data and Validation Memo
+
+## **1. Executive summary**
+
+Forest Software expects to receive EUR 1,700,000 from a Finnish customer in 182 days. As a U.S.-based company reporting in U.S. dollars, Forest Software is exposed to the risk that the euro depreciates before settlement, reducing the USD value of its receivable.
+
+Using the supplied market inputs, the forward contract provides the highest locked-in USD proceeds of **$1,989,850**, compared with approximately $1.879 million under the money-market hedge and minimum net proceeds of $1,835,320 under the EUR put option.
+
+However, the assigned forward rate of 1.1705 USD/EUR is materially higher than the covered interest parity (CIP) implied forward rate of approximately 1.1052 USD/EUR. This discrepancy raises concerns regarding the comparability and availability of the assigned forward quotation.
+
+**Recommendation:** Forest Software should pursue a full forward hedge, conditional upon obtaining a current, executable bank quotation. The assigned forward provides the most attractive combination of cash-flow certainty and USD proceeds, but Treasury should not authorize the transaction based solely on the undated scenario quote.
+
+Receivable hedge comparison
+
+# **$1,989,850.00**
+
+Forward hedge — conditional on quote availability
+
+Forward hedge
+
+$1,989,850.00
+
+Money-market hedge
+
+$1,878,868.58
+
+Unhedged at current spot
+
+$1,868,300.00
+
+Put option floor
+
+$1,835,320.00
+
+Unhedged proceeds are illustrative, while the put floor represents minimum net proceeds under the specified premium convention.
+
+## **2. Market inputs**
+
+The Stage 4 market inputs supersede the illustrative assumptions in the Stage 2 specification. The calculation methodology remains unchanged.
+
+| Named range | Value       |
+| ----------- | ----------- |
+| `FC_AMT`    | €1,700,000  |
+| `S0_in`     | 1.0990      |
+| `F0_in`     | 1.1705      |
+| `R_USD`     | 4.510%      |
+| `R_FC`      | 3.372%      |
+| `K_PUT`     | 1.0990      |
+| `K_CALL`    | 1.0990      |
+| `PREM_PUT`  | $0.0194/EUR |
+| `PREM_CALL` | $0.0296/EUR |
+| `T_DAYS`    | 182         |
+
+All interest calculations use simple interest and the ACT/360 day-count convention. Option premiums are paid at inception but deducted directly from settlement proceeds without adjusting for their time value, consistent with the specification.&#x20;
+
+Pasted text(3).txt
+
+
+
+The applicable year fraction is:
+
+\\[ T=\frac{182}{360}=0.505555556 \\]
+
+The initial USD value of the receivable is:
+
+\\[ 1,700,000(1.0990)=\boxed{\\$1,868,300.00} \\]
+
+## **3. Hedge calculations**
+
+### **3.1 Unhedged position**
+
+If Forest Software remains unhedged, the company converts the EUR receivable into USD at the prevailing settlement exchange rate.
+
+\\[ \text{Unhedged Proceeds}=FC\_{AMT}\times S_T \\]
+
+\\[ =1,700,000\times S_T \\]
+
+| Settlement scenario   | Exchange rate | USD proceeds  |
+| --------------------- | ------------- | ------------- |
+| EUR depreciates 5%    | 1.04405       | $1,774,885.00 |
+| EUR remains unchanged | 1.09900       | $1,868,300.00 |
+| EUR appreciates 5%    | 1.15395       | $1,961,715.00 |
+
+Every 1% change in the exchange rate relative to the initial spot rate changes the USD value of the receivable by $18,683.
+
+The unhedged position requires no upfront hedging expenditure and provides full participation in euro appreciation. However, it exposes Forest Software to potentially significant losses if the euro depreciates.
+
+### **3.2 Forward hedge**
+
+Forest Software enters into a 182-day forward contract to sell EUR 1,700,000 in exchange for USD at the assigned forward rate.
+
+\\[ \text{Forward Proceeds}=FC\_{AMT}\times F_0 \\]
+
+\\[ =1,700,000(1.1705) \\]
+
+Forward_Proceeds
+
+# **$1,989,850.00**
+
+Locked exchange rate: 1.1705 USD/EUR
+
+The forward hedge provides $121,550 more than the receivable's initial USD value, representing an improvement of approximately 6.51%.
+
+The proceeds remain constant regardless of the settlement exchange rate. No upfront premium is assumed under the specification.
+
+### **3.3 Money-market hedge**
+
+The money-market hedge consists of three separate transactions: borrowing euros, converting the borrowed euros into USD, and investing the USD until settlement. The future receivable is then used to repay the EUR loan.&#x20;
+
+Pasted text(3).txt
+
+
+
+**Step 1: Borrow EUR today**
+
+Calculate the present value of the EUR receivable using the EUR interest rate.
+
+\\[ FC\_{Borrow}=\frac{FC\_{AMT}}{1+R\_{FC}T} \\]
+
+\\[ =\frac{1,700,000}{1+0.03372(182/360)} \\]
+
+\\[ =\boxed{€1,671,505.29} \\]
+
+**Step 2: Convert borrowed EUR into USD**
+
+\\[ USD\_{Now}=FC\_{Borrow}\times S_0 \\]
+
+\\[ =1,671,505.29211685(1.0990) \\]
+
+\\[ =\boxed{\\$1,836,984.32} \\]
+
+**Step 3: Invest USD until settlement**
+
+\\[ MM\_{Proceeds}=USD\_{Now}(1+R\_{USD}T) \\]
+
+\\[ =1,836,984.31603642 \\]
+
+\\[ \times(1+0.0451(182/360)) \\]
+
+\\[ =\boxed{\\$1,878,868.58} \\]
+
+### **Money-market hedge transaction flow**
+
+Borrow EUR today
+
+# **€1,671,505.29**
+
+EUR borrowing rate: 3.372%
+
+Convert at 1.0990 USD/EUR
+
+USD available today
+
+# **$1,836,984.32**
+
+Invest for 182 days at 4.51%
+
+USD proceeds at settlement
+
+# **$1,878,868.58**
+
+EUR loan principal
+
+€1,671,505.29
+
+EUR interest expense
+
+€28,494.71
+
+**EUR loan repayment**
+
+**€1,700,000.00**
+
+The EUR receivable exactly offsets the outstanding EUR loan at settlement. The USD investment earns $41,884.26 in interest.
+
+Although the money-market hedge eliminates exchange-rate uncertainty under the model assumptions, it produces $110,981.42 less than the assigned forward hedge and requires access to borrowing and investment facilities.
+
+### **3.4 EUR put option hedge**
+
+Forest Software purchases a European-style EUR put option with a strike price of 1.0990 USD/EUR. The option protects the company against euro depreciation while preserving the opportunity to benefit from euro appreciation.
+
+**Total option premium**
+
+\\[ Put\_{Premium}=FC\_{AMT}\times PREM\_{PUT} \\]
+
+\\[ =1,700,000(0.0194) \\]
+
+\\[ =\boxed{\\$32,980.00} \\]
+
+**Gross proceeds**
+
+\\[ Put\_{Gross}=1,700,000\max(S_T,1.0990) \\]
+
+**Net proceeds**
+
+\\[ Put\_{Net}=1,700,000\max(S_T,1.0990) \\]
+
+\\[ -32,980 \\]
+
+**Minimum net proceeds**
+
+\\[ Put\_{Floor}=1,700,000(1.0990-0.0194) \\]
+
+\\[ =\boxed{\\$1,835,320.00} \\]
+
+The effective minimum net exchange rate is:
+
+\\[ 1.0990-0.0194=\boxed{1.0796} \\]
+
+| Settlement scenario   | Gross proceeds | Net proceeds |
+| --------------------- | -------------- | ------------ |
+| EUR depreciates 5%    | $1,868,300     | $1,835,320   |
+| EUR remains unchanged | $1,868,300     | $1,835,320   |
+| EUR appreciates 5%    | $1,961,715     | $1,928,735   |
+
+The put option guarantees minimum net proceeds of $1,835,320 under the specified premium convention. Its primary disadvantage is the $32,980 upfront premium, which reduces proceeds regardless of whether the option is exercised.
+
+The premium's financing cost is excluded in accordance with the Stage 2 specification.
+
+### **3.5 EUR call option — hypothetical payable**
+
+The EUR call option is included separately as a comparison for a hypothetical EUR 1,700,000 payable. It is not an appropriate standalone hedge for Forest Software's existing receivable and must be excluded from the receivable strategy ranking.&#x20;
+
+Pasted text(3).txt
+
+
+
+**Total call premium**
+
+\\[ Call\_{Premium}=1,700,000(0.0296) \\]
+
+\\[ =\boxed{\\$50,320.00} \\]
+
+**Net payable cost**
+
+\\[ Call\_{Net}=1,700,000\min(S_T,1.0990) \\]
+
+\\[ +50,320 \\]
+
+**Maximum payable cost**
+
+\\[ Call\_{Max}=1,700,000(1.0990+0.0296) \\]
+
+\\[ =\boxed{\\$1,918,620.00} \\]
+
+The effective maximum exchange rate, including the premium, is 1.1286 USD/EUR.
+
+| Settlement scenario   | Unhedged payable cost | Call-hedged cost |
+| --------------------- | --------------------- | ---------------- |
+| EUR depreciates 5%    | $1,774,885            | $1,825,205       |
+| EUR remains unchanged | $1,868,300            | $1,918,620       |
+| EUR appreciates 5%    | $1,961,715            | $1,918,620       |
+
+The call protects a hypothetical importer against euro appreciation while allowing the importer to benefit from euro depreciation.
+
+## **4. Covered interest rate parity analysis**
+
+Covered interest rate parity provides a theoretical benchmark for evaluating whether the quoted forward exchange rate is consistent with the spot exchange rate and the interest-rate differential between the two currencies.
+
+### **CIP-implied forward rate**
+
+\\[ F\_{implied}=S_0 \frac{1+R\_{USD}T}{1+R\_{FC}T} \\]
+
+\\[ =1.0990 \frac{1+0.0451(182/360)} {1+0.03372(182/360)} \\]
+
+\\[ =\boxed{1.1052168112} \\]
+
+### **Parity difference**
+
+Following the sign convention in the Stage 2 specification:
+
+\\[ Parity\_{Difference}=F\_{implied}-F_0 \\]
+
+\\[ =1.1052168112-1.1705 \\]
+
+\\[ =\boxed{-0.0652831888} \\]
+
+The assigned bank forward exceeds the CIP-implied forward by approximately 652.83 pips, or 5.91% relative to the CIP-implied rate.
+
+### **Proceeds difference**
+
+\\[ Proceeds\_{Difference}=MM\_{Proceeds} \\]
+
+\\[ -Forward\_{Proceeds} \\]
+
+\\[ =1,878,868.58-1,989,850.00 \\]
+
+\\[ =\boxed{-\\$110,981.42} \\]
+
+### **Parity validation**
+
+REVIEW
+
+Assigned forward rate
+
+# **1.170500**
+
+CIP-implied rate
+
+# **1.105217**
+
+Absolute rate difference
+
+## **0.065283**
+
+Tolerance: 0.00001
+
+Absolute proceeds difference
+
+## **$110,981.42**
+
+Tolerance: $20.00
+
+Both differences exceed the illustrative validation tolerances established in Stage 2.
+
+The parity discrepancy should not automatically be interpreted as an arbitrage opportunity. The Stage 4 memo identifies several limitations:
+
+- The assigned forward quotation is undated and is not confirmed to be executable.
+- The spot exchange rate is an ECB reference fixing rather than a tradable bank quotation.
+- The USD Treasury yield and EUR Euribor rate represent different types of financial instruments.
+- The interest-rate benchmarks have one-year maturities rather than matching the 182-day hedge horizon.
+- Actual borrowing rates, lending rates, bid-ask spreads and transaction costs may differ from the model assumptions.
+
+The model correctly returns a REVIEW status under the specified validation rules. The discrepancy reflects inconsistent or unmatched market inputs rather than an identified error in the hedge calculation formulas.
+
+## **5. Sensitivity analysis**
+
+The Stage 2 specification requires eleven settlement exchange-rate scenarios ranging from a 5% depreciation to a 5% appreciation relative to the initial spot exchange rate, using increments of one percentage point.&#x20;
+
+Pasted text(3).txt
+
+
+
+\\[ S_T(i)=1.0990\left(1+\frac{i}{100}\right) \\]
+
+### **5.1 Complete sensitivity table**
+
+All proceeds are expressed in USD and displayed to two decimal places.
+
+| Spot change | Settlement spot | Unhedged     | Forward      | Money-market | Put net      |
+| ----------- | --------------- | ------------ | ------------ | ------------ | ------------ |
+| −5%         | 1.04405         | 1,774,885.00 | 1,989,850.00 | 1,878,868.58 | 1,835,320.00 |
+| −4%         | 1.05504         | 1,793,568.00 | 1,989,850.00 | 1,878,868.58 | 1,835,320.00 |
+| −3%         | 1.06603         | 1,812,251.00 | 1,989,850.00 | 1,878,868.58 | 1,835,320.00 |
+| −2%         | 1.07702         | 1,830,934.00 | 1,989,850.00 | 1,878,868.58 | 1,835,320.00 |
+| −1%         | 1.08801         | 1,849,617.00 | 1,989,850.00 | 1,878,868.58 | 1,835,320.00 |
+| 0%          | 1.09900         | 1,868,300.00 | 1,989,850.00 | 1,878,868.58 | 1,835,320.00 |
+| +1%         | 1.10999         | 1,886,983.00 | 1,989,850.00 | 1,878,868.58 | 1,854,003.00 |
+| +2%         | 1.12098         | 1,905,666.00 | 1,989,850.00 | 1,878,868.58 | 1,872,686.00 |
+| +3%         | 1.13197         | 1,924,349.00 | 1,989,850.00 | 1,878,868.58 | 1,891,369.00 |
+| +4%         | 1.14296         | 1,943,032.00 | 1,989,850.00 | 1,878,868.58 | 1,910,052.00 |
+| +5%         | 1.15395         | 1,961,715.00 | 1,989,850.00 | 1,878,868.58 | 1,928,735.00 |
+
+### **5.2 Hedge comparison chart**
+
+### **USD Proceeds by EUR/USD Settlement Rate**
+
+USD proceeds in millions
+
+UnhedgedForwardMoney-marketPut hedge
+
+$1.8M$1.8M$1.9M$2M$2M1.044051.055041.066031.077021.088011.099001.109991.120981.131971.142961.15395
+
+Settlement exchange rate (USD/EUR)
+
+The forward hedge produces the highest USD proceeds in all eleven scenarios. Even if the euro appreciates by 5%, the unhedged position generates $28,135 less than the assigned forward hedge.
+
+The money-market hedge and forward hedge both remain constant across the sensitivity range. However, unlike the illustrative Stage 2 results, the two lines do not nearly overlap because of the material parity discrepancy.
+
+The put option establishes a flat minimum proceeds floor when the settlement exchange rate is below the strike and increases linearly when the exchange rate exceeds the strike.
+
+### **5.3 Interactive settlement scenario**
+
+Settlement exchange rate (USD/EUR)
+
+# **1.0990**
+
+0.00% change
+
+0.9500
+
+1.0990
+
+1.2500
+
+Unhedged
+
+$1,868,300.00
+
+Forward
+
+$1,989,850.00
+
+Money-market
+
+$1,878,868.58
+
+Put option
+
+$1,835,320.00
+
+Highest proceeds at selected rate
+
+**Forward**
+
+Reset to initial spot rate
+
+The interactive scenario extends beyond the required ±5% sensitivity range to illustrate when alternative strategies could outperform the forward.
+
+## **6. Break-even analysis**
+
+### **6.1 Unhedged versus forward**
+
+The unhedged position matches the forward hedge when:
+
+\\[ 1,700,000S_T=1,989,850 \\]
+
+\\[ \boxed{S_T=1.1705} \\]
+
+The euro must appreciate approximately 6.51% from the initial spot rate before remaining unhedged produces higher proceeds than the assigned forward.
+
+### **6.2 Put option versus forward**
+
+Above the put strike, the put option matches the forward when:
+
+\\[ 1,700,000S_T-32,980=1,989,850 \\]
+
+\\[ \boxed{S_T=1.1899} \\]
+
+The euro must appreciate approximately 8.27% before the put option outperforms the assigned forward hedge.
+
+### **6.3 Unhedged versus money-market hedge**
+
+\\[ 1,700,000S_T=1,878,868.58 \\]
+
+\\[ \boxed{S_T=1.1052168112} \\]
+
+The euro must appreciate approximately 0.57% before the unhedged position outperforms the money-market hedge.
+
+### **6.4 Put option versus money-market hedge**
+
+\\[ 1,700,000S_T-32,980=1,878,868.58 \\]
+
+\\[ \boxed{S_T=1.1246168112} \\]
+
+The euro must appreciate approximately 2.33% before the put option outperforms the money-market hedge.
+
+### **6.5 Put option versus unhedged position**
+
+Below the strike price, the put option matches the unhedged position when:
+
+\\[ 1,700,000S_T=1,835,320 \\]
+
+\\[ \boxed{S_T=1.0796} \\]
+
+The euro must depreciate approximately 1.77% before the protection provided by the put option outweighs its premium relative to remaining unhedged.
+
+### **Break-even summary**
+
+| Comparison                | Break-even rate | Change from initial spot |
+| ------------------------- | --------------- | ------------------------ |
+| Unhedged vs. forward      | 1.170500        | +6.51%                   |
+| Put vs. forward           | 1.189900        | +8.27%                   |
+| Unhedged vs. money-market | 1.105217        | +0.57%                   |
+| Put vs. money-market      | 1.124617        | +2.33%                   |
+| Put vs. unhedged          | 1.079600        | −1.77%                   |
+
+## **7. Strategy comparison**
+
+| Characteristic                         | Unhedged         | Forward    | Money-market  | Put option                 |
+| -------------------------------------- | ---------------- | ---------- | ------------- | -------------------------- |
+| Guaranteed minimum                     | None beyond zero | $1,989,850 | $1,878,868.58 | $1,835,320                 |
+| Upfront premium                        | $0               | $0         | $0            | $32,980                    |
+| Downside protection                    | None             | Full       | Full          | Below strike               |
+| Upside participation                   | Full             | None       | None          | Above strike, less premium |
+| Borrowing required                     | No               | No         | Yes           | No\*                       |
+| Cash-flow certainty                    | Low              | High       | High          | Partial                    |
+| Best outcome within sensitivity range  | $1,961,715       | $1,989,850 | $1,878,868.58 | $1,928,735                 |
+| Worst outcome within sensitivity range | $1,774,885       | $1,989,850 | $1,878,868.58 | $1,835,320                 |
+
+\*Assumes the company has sufficient cash to pay the option premium.
+
+Under the supplied assumptions, the forward hedge guarantees $154,530 more than the put option's minimum proceeds and $110,981.42 more than the money-market hedge.
+
+The forward also eliminates the borrowing requirements associated with the money-market hedge and the upfront premium associated with the option hedge.
+
+## **8. Independent calculation validation**
+
+The following results were recalculated directly from the Stage 2 formulas and Stage 4 input register. The Stage 4 memo's reported results were used for comparison after calculation.
+
+| Output                       | Recalculated result | Stage 4 memo  | Status     |
+| ---------------------------- | ------------------- | ------------- | ---------- |
+| Initial USD value            | $1,868,300.00       | Not stated    | Calculated |
+| Forward proceeds             | $1,989,850.00       | $1,989,850.00 | Match      |
+| EUR borrowed                 | €1,671,505.29       | Not stated    | Calculated |
+| USD converted today          | $1,836,984.32       | Not stated    | Calculated |
+| Money-market proceeds        | $1,878,868.58       | $1,878,868.58 | Match      |
+| Put premium                  | $32,980.00          | $32,980.00    | Match      |
+| Put floor                    | $1,835,320.00       | $1,835,320.00 | Match      |
+| Call premium                 | $50,320.00          | $50,320.00    | Match      |
+| Call maximum cost            | $1,918,620.00       | $1,918,620.00 | Match      |
+| CIP-implied forward          | 1.1052168112        | 1.1052168112  | Match      |
+| Absolute parity difference   | 0.0652831888        | 0.0652831888  | Match      |
+| Absolute proceeds difference | $110,981.42         | $110,981.42   | Match      |
+
+### **Structural validation**
+
+All ten listed input parameters are present
+
+PASS
+
+Interest rates use decimal values
+
+PASS
+
+ACT/360 simple interest applied
+
+PASS
+
+EUR loan repayment equals EUR receivable
+
+PASS
+
+Forward proceeds remain constant
+
+PASS
+
+Money-market proceeds remain constant
+
+PASS
+
+Put proceeds never fall below the floor
+
+PASS
+
+Put payoff is continuous at the strike
+
+PASS
+
+Call payable cost is capped correctly
+
+PASS
+
+Call excluded from receivable hedge ranking
+
+PASS
+
+Exactly eleven sensitivity scenarios
+
+PASS
+
+Sensitivity scenarios centered on initial spot
+
+PASS
+
+Forward-rate parity tolerance
+
+REVIEW
+
+Proceeds-based parity tolerance
+
+REVIEW
+
+Current executable bank quotation
+
+PENDING
+
+Named-range and workbook validation
+
+PENDING
+
+External FX Hedging Lab comparison
+
+PENDING
+
+### **Documentation discrepancies**
+
+Three documentation issues were identified.
+
+**Named-range count:** The Stage 2 specification repeatedly requires eleven named input ranges but lists only ten. All ten listed inputs are provided in the Stage 4 memo. No additional input was invented to satisfy the stated count.
+
+**Parity difference sign:** The Stage 2 specification defines the parity difference as the implied forward less the quoted forward. The Stage 4 memo reports the difference in the opposite direction. Both calculations have the same absolute magnitude, but the signs differ. This analysis follows the Stage 2 sign convention.
+
+**Placeholder validation figures:** The original Stage 2 check figures were calculated using different spot rates, interest rates and option strikes. They should not be treated as universal validation targets after the introduction of Stage 4 market inputs.
+
+None of these documentation issues prevents the calculation of the hedge outcomes, but they should be addressed before final model acceptance.
+
+## **9. Executive recommendation**
+
+**To:** Chief Financial Officer, Forest Software\
+**From:** Treasury Analysis\
+**Subject:** Recommended Foreign Exchange Hedging Strategy
+
+### **Recommendation**
+
+Forest Software should pursue a forward contract covering the entire EUR 1,700,000 receivable, subject to confirmation of an executable forward quotation. Based on the assigned forward rate of 1.1705 USD/EUR, the company would secure $1,989,850 in proceeds at settlement, eliminating uncertainty surrounding the USD value of the receivable.
+
+### **Financial rationale**
+
+The forward hedge provides the highest proceeds across all eleven exchange-rate scenarios evaluated. Compared with the money-market hedge, the forward generates an additional $110,981.42 without requiring the company to borrow euros and invest the converted USD. The forward also guarantees $154,530 more than the minimum net proceeds provided by the put option while avoiding the $32,980 upfront premium.
+
+Although remaining unhedged or purchasing a put option would allow Forest Software to benefit from euro appreciation, the euro would need to appreciate by approximately 6.51% and 8.27%, respectively, before these strategies outperform the assigned forward. Given the company's exposure to euro depreciation, securing predictable operating cash flow is preferable to relying on favorable exchange-rate movements, assuming cash-flow certainty is Treasury's primary objective.
+
+### **Market-data concerns**
+
+The primary concern with the forward hedge is the significant discrepancy between the assigned bank forward and the CIP-implied forward rate. Based on the supplied interest-rate benchmarks, the theoretical forward rate is 1.1052168112 USD/EUR, substantially below the assigned rate of 1.1705 USD/EUR.
+
+Because the assigned forward quotation is undated and the interest-rate benchmarks do not represent matched executable financing rates, Treasury should obtain updated quotations before committing to a transaction. The apparent advantage of the forward hedge may be substantially reduced once current market conditions are reflected.
+
+### **Alternative strategy**
+
+If the assigned forward rate is unavailable, Forest Software should compare the updated bank quotation against a money-market hedge calculated using executable borrowing and lending rates.
+
+Under the supplied benchmark assumptions, the money-market hedge is equivalent to a forward rate of approximately 1.1052168112 USD/EUR. An executable forward above this rate would provide higher nominal proceeds than the benchmark money-market hedge, before considering transaction costs and other financing considerations.
+
+If Treasury prioritizes participation in favorable exchange-rate movements over maximizing guaranteed proceeds, the EUR put option remains a viable alternative. However, its lower guaranteed proceeds and upfront premium make it less attractive under the supplied assumptions.
+
+### **Conclusion**
+
+Forest Software should prioritize eliminating foreign exchange uncertainty rather than attempting to profit from currency movements. A full forward hedge is the preferred strategy based on the supplied inputs, provided that the forward quotation can be confirmed. Treasury should complete the market-data reconciliation before executing the hedge.
+
+## **10. Final output register**
+
+| Required output                      | Calculated value |
+| ------------------------------------ | ---------------- |
+| `Initial_USD_Value`                  | $1,868,300.00    |
+| `Forward_Proceeds`                   | $1,989,850.00    |
+| `Forward_Locked_Rate`                | 1.1705           |
+| `FC_Borrow`                          | €1,671,505.29    |
+| `USD_Now`                            | $1,836,984.32    |
+| `MM_Proceeds`                        | $1,878,868.58    |
+| `Put_Premium_Total`                  | $32,980.00       |
+| `Put_Gross_Proceeds` at initial spot | $1,868,300.00    |
+| `Put_Net_Proceeds` at initial spot   | $1,835,320.00    |
+| `Put_Floor`                          | $1,835,320.00    |
+| `Call_Premium_Total`                 | $50,320.00       |
+| `Call_Net_Cost` at initial spot      | $1,918,620.00    |
+| `Call_Max_Cost`                      | $1,918,620.00    |
+| `F_implied`                          | 1.1052168112     |
+| `Parity_Difference`                  | −0.0652831888    |
+| `Proceeds_Difference`                | −$110,981.42     |
+| `Parity_Status`                      | REVIEW           |
+
+## **11. Analysis limitations and completion status**
+
+This analysis was completed using the two supplied documents as its sole informational basis. No additional market data, external forecasts, or existing workbook results were incorporated.
+
+The numerical hedge calculations have been independently recomputed and reconcile with the Stage 4 memo. However, the following limitations remain:
+
+- The underlying market-data sources have not been independently authenticated.
+- The assigned forward and option premiums have not been confirmed as executable quotations.
+- The existing Excel workbook, named ranges and formula references have not been inspected.
+- The external FX Hedging Lab comparison has not been performed.
+- The recommendation assumes that Forest Software prioritizes cash-flow certainty because the documents do not establish a specific corporate risk tolerance or minimum cash-flow requirement.
+- No settlement exchange-rate probability distribution was supplied, so expected proceeds cannot be calculated without introducing additional assumptions.
+
+This is an academic treasury analysis; I'm not a financial advisor.
+
+**Final analysis status:** Numerical calculations complete; market-data and execution validation outstanding.
+
+**Recommended strategy:** Full forward hedge, conditional on obtaining a current, executable bank quotation and confirming its advantage over the available alternatives.
